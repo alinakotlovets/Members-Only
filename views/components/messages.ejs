@@ -1,0 +1,10 @@
+<% if(messages.length > 0 ){ %>
+    <ul>
+        <% messages.forEach((message)=>{ %>
+            <li>
+                <h2><%= message.message_title %></h2>
+                <h3><%= message.message_text %></h3>
+            </li>
+        <% }) %>
+    </ul>
+<% } %>

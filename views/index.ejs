@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Members only</title>
+</head>
+<body>
+<% if (user) { %>
+    <p>Hello, <%= user.user_first_name %>!</p>
+    <a href="/log-out">Log out</a>
+<% } else { %>
+    <a href="/sign-in">Sign in</a>
+    <a href="/sign-up">Sign up</a>
+<% } %>
+
+<%- include('components/messages.ejs', {messages: messages}) %>
+</body>
+</html>

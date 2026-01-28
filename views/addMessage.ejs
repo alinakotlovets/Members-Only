@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign Up</title>
+</head>
+<body>
+<form action="/message/add" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" value="<%= title %>" name="title">
+    <label for="message">Message:</label>
+    <input type="text" name="message" value="<%= message %>" id="message">
+    <%- include('components/errors.ejs', {errors: errors}) %>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
