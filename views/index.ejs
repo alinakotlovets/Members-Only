@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Members only</title>
 </head>
 <body>
-<% if (user) { %>
-    <p>Hello, <%= user.user_first_name %>!</p>
-    <a href="/log-out">Log out</a>
-<% } else { %>
-    <a href="/sign-in">Sign in</a>
-    <a href="/sign-up">Sign up</a>
-<% } %>
+<%- include("components/navbar.ejs") %>
+<div class="container">
+    <% if (user) { %>
+        <h2>Hello, <%= user.username %>!</h2>
+        <h3>You can share your thoughts with the community</h3>
+        <div>
+            <h2>Add message</h2>
+            <a href="/message/add">+</a>
+        </div>
+    <% } else { %>
+        <h2>Welcome to Members Only!</h2>
+        <h3><a href="/sign-up">Sign up</a> so you can write your own post and became a member to reveal authors.</h3>
+    <% } %>
 
-<%- include('components/messages.ejs', {messages: messages}) %>
+    <%- include('components/messages.ejs', {messages: messages}) %>
+</div>
 </body>
+<script src="/js/deleteMessage.js"></script>
 </html>

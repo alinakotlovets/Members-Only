@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Membership</title>
+</head>
+<body>
+<%- include("components/navbar.ejs") %>
+<div class="container">
+    <h2>Membership Status</h2>
+    <h3>Unlock exclusive features and see member details</h3>
+    <% if(user && !user.is_member) { %>
+        <div>
+            <h2>Become a Member</h2>
+            <h3>The code is the sum of 100, 10 and 1 </h3>
+            <form action="/membership" method="post">
+                <label for="membershipCode">Membership code:</label>
+                <input type="text" id="membershipCode" value="<%= membershipCode %>" name="membershipCode">
+                <%- include('components/errors.ejs', {errors: errors}) %>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    <% } else if (user && user.is_member) { %>
+        <div>
+            <h2>You are a member congrats!</h2>
+            <a href="/">Back to messages</a>
+        </div>
+    <% } %>
+</div>
+</body>
+</html>

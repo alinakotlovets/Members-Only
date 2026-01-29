@@ -1,9 +1,16 @@
 <% if(messages.length > 0 ){ %>
-    <ul>
+    <ul class="messages-list">
         <% messages.forEach((message)=>{ %>
             <li>
                 <h2><%= message.message_title %></h2>
                 <h3><%= message.message_text %></h3>
+                <h4><%= (user && user.is_member) ? message.username : "anonymous user" %></h4>
+                <% if (user && user.is_member) { %>
+                    <p><%= message.formattedDate %></p>
+                <% } %>
+                <% if(user && user.is_admin) { %>
+                    <button class="delete-message-btn" data-message-id="<%= message.message_id %>">Delete</button>
+                <% } %>
             </li>
         <% }) %>
     </ul>

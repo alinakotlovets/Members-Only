@@ -3,10 +3,13 @@ import path from "node:path";
 import {fileURLToPath} from "node:url";
 import session from "express-session";
 import {initializePassport} from "./middleware/passport.js";
+import setUserLocals from "./middleware/setUserLocals.js";
 import signUpRouter from "./routes/signUpRouter.js";
 import singInRouter from "./routes/singInRouter.js";
 import messagesRouter from "./routes/messagesRouter.js";
 import indexRouter from "./routes/indexRouter.js";
+import membershipRouter from "./routes/membershipRouter.js";
+import adminRouter from "./routes/adminRouter.js";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,31 +24,22 @@ const passportInstance = initializePassport();
 app.use(session({secret: "cats", resave: false, saveUninitialized: false}));
 app.use(passportInstance.initialize());
 app.use(passportInstance.session());
-
+app.use(setUserLocals);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
-app.use((req, res, next) => {
-    res.locals.user = req.user;
-    next();
-});
-
+app.use("/admin", adminRouter)
+app.use("/membership", membershipRouter);
 app.use("/message", messagesRouter);
 app.use("/sign-in", singInRouter);
 app.use("/sign-up", signUpRouter);
-app.get("/log-out", (req, res, next) => {
-    req.logout((err) => {
-        if (err) {
-            return next(err);
-        }
-        res.redirect("/sign-in");
-    });
-});
-
-app.get("/", indexRouter);
+app.use("/", indexRouter);
+app.use((req, res) => {
+    res.render("404");
+})
 
 
 const port = 3000;

@@ -15,10 +15,32 @@ export async function addUserToBd(firstName, lastName, username, password) {
 }
 
 export async function addMessageToBd(title, message, userId) {
-    await pool.query("INSERT INTO messages (message_title, message_text, user_id) VALUES ($1, $2, $3)", [title, message, userId]);
+    await pool.query("INSERT INTO messages (message_title, message_text, user_id, date) VALUES ($1, $2, $3, NOW())", [title, message, userId]);
 }
 
 export async function getAllMessages() {
-    const {rows} = await pool.query("SELECT * FROM messages")
+    const query = `
+        SELECT messages.message_id,
+               messages.message_title,
+               messages.message_text,
+               messages.date,
+               users.username
+        FROM messages
+                 JOIN users ON messages.user_id = users.user_id
+        ORDER BY messages.date DESC;
+    `;
+    const {rows} = await pool.query(query);
     return rows;
+}
+
+export async function addMembershipStatus(userId) {
+    await pool.query("UPDATE users SET is_member = true WHERE user_id = $1", [userId])
+}
+
+export async function addAdminStatus(userId) {
+    await pool.query("UPDATE users SET is_member = true, is_admin = true WHERE user_id = $1", [userId])
+}
+
+export async function deleteMessageById(messageId) {
+    await pool.query("DELETE FROM messages WHERE message_id = $1", [messageId]);
 }

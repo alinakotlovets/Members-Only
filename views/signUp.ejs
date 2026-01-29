@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Sign Up</title>
 </head>
 <body>
-<form action="/sign-up" method="post">
-    <label for="firstName">First name:</label>
-    <input type="text" name="firstName" value="<%= firstName %>" id="firstName">
-    <label for="lastName">Last name:</label>
-    <input type="text" name="lastName" value="<%= lastName %>" id="lastName">
-    <label for="username">Username:</label>
-    <input type="text" id="username" value="<%= username %>" name="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="<%= password %>" id="password">
-    <label for="confirmPassword">Confirm password: </label>
-    <input type="password" name="confirmPassword" value="<%= confirmPassword %>" id="confirmPassword">
-    <%- include('components/errors.ejs', {errors: errors}) %>
-    <button type="submit">Submit</button>
-</form>
+<%- include("components/navbar.ejs") %>
+<div class="container">
+    <div class="form-box">
+        <div class="text-form-box">
+            <h2>Sign Up</h2>
+            <h3 class="text-grey">Create your account to get started</h3>
+        </div>
+        <form action="/sign-up" method="post">
+            <label for="firstName">First name:</label>
+            <input type="text" name="firstName" value="<%= firstName %>" id="firstName">
+            <label for="lastName">Last name:</label>
+            <input type="text" name="lastName" value="<%= lastName %>" id="lastName">
+            <label for="username">Username:</label>
+            <input type="text" id="username" value="<%= username %>" name="username">
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="<%= password %>" id="password">
+            <label for="confirmPassword">Confirm password: </label>
+            <input type="password" name="confirmPassword" value="<%= confirmPassword %>" id="confirmPassword">
+            <%- include('components/errors.ejs', {errors: errors}) %>
+            <div class="form-button-box">
+                <button class="submit-btn" type="submit">Submit</button>
+            </div>
+        </form>
+        <h4 class="text-grey">Already have an account? <a href="/sign-in">Sign in here</a></h4>
+    </div>
+</div>
 </body>
 </html>

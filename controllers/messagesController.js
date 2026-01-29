@@ -1,4 +1,4 @@
-import {addMessageToBd} from "../db/queries.js";
+import {addMessageToBd, deleteMessageById} from "../db/queries.js";
 import {body, validationResult, matchedData} from "express-validator";
 
 export const validateMessage = [
@@ -13,6 +13,9 @@ export const validateMessage = [
 ]
 
 export function getAddMessage(req, res) {
+    if (!req.user) {
+        return res.redirect("/sign-in");
+    }
     res.render("addMessage", {errors: [], title: "", message: ""});
 }
 
@@ -36,4 +39,10 @@ export async function postMessage(req, res) {
     let {title, message} = matchedData(req);
     await addMessageToBd(title, message, userId);
     res.redirect("/");
+}
+
+export async function deleteMessage(req, res) {
+    const {messageId} = req.params;
+    await deleteMessageById(messageId);
+    res.status(200).json({success: true});
 }

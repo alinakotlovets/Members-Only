@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Admin</title>
+</head>
+<body>
+<%- include("components/navbar.ejs") %>
+<div class="container">
+    <h2>Admin status</h2>
+    <h3>Unlock exclusive features and see admin details</h3>
+    <% if(user && !user.is_admin) { %>
+        <form action="/admin" method="post">
+            <label for="adminCode">Admin code:</label>
+            <input type="text" id="adminCode" value="<%= adminCode %>" name="adminCode">
+            <%- include('components/errors.ejs', {errors: errors}) %>
+            <button type="submit">Submit</button>
+        </form>
+    <% } else if (user && user.is_member) { %>
+        <div>
+            <h2>You are admin congrats!</h2>
+            <a href="/">Go back to messages</a>
+        </div>
+    <% } %>
+</div>
+</body>
+</html>
