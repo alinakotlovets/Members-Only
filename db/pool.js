@@ -7,5 +7,5 @@ const dbUrl = process.env.NODE_ENV === 'production'
 
 export const pool = new Pool({
     connectionString: dbUrl,
-    // ssl: {rejectUnauthorized: false}
+    ssl: {rejectUnauthorized: false}
 });

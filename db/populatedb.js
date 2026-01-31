@@ -8,7 +8,7 @@ const dbUrl = process.env.NODE_ENV === 'production'
 async function main() {
     const client = new Client({
         connectionString: dbUrl,
-        // ssl: {rejectUnauthorized: false}
+        ssl: {rejectUnauthorized: false}
     });
 
     try {

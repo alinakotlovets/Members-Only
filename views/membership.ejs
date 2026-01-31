@@ -9,25 +9,35 @@
 <body>
 <%- include("components/navbar.ejs") %>
 <div class="container">
-    <h2>Membership Status</h2>
-    <h3>Unlock exclusive features and see member details</h3>
+    <div class="text-form-box margin-bottom-20px">
+        <h2>Membership Status</h2>
+        <h3 class="text-grey">Unlock exclusive features and see member details</h3>
+    </div>
     <% if(user && !user.is_member) { %>
-        <div>
-            <h2>Become a Member</h2>
-            <h3>The code is the sum of 100, 10 and 1 </h3>
+    <div class="form-box">
+        <div class="form">
+            <div class="text-form-box margin-bottom-10px">
+                <h2>Become a Member</h2>
+                <h3 class="text-grey">The code is the sum of 100, 10 and 1 </h3>
+            </div>
             <form action="/membership" method="post">
                 <label for="membershipCode">Membership code:</label>
                 <input type="text" id="membershipCode" value="<%= membershipCode %>" name="membershipCode">
                 <%- include('components/errors.ejs', {errors: errors}) %>
-                <button type="submit">Submit</button>
+                <div class="form-button-box">
+                    <button class="submit-btn" type="submit">Submit</button>
+                </div>
             </form>
         </div>
-    <% } else if (user && user.is_member) { %>
-        <div>
-            <h2>You are a member congrats!</h2>
-            <a href="/">Back to messages</a>
-        </div>
-    <% } %>
+        <% } else if (user && user.is_member) { %>
+            <div class="form-box">
+                <div class="form form-box">
+                    <h2>You are a member congrats!</h2>
+                    <a class="submit-btn" href="/">Back to messages</a>
+                </div>
+            </div>
+        <% } %>
+    </div>
 </div>
 </body>
 </html>

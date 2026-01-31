@@ -8,17 +8,23 @@
 </head>
 <body>
 <%- include("components/navbar.ejs") %>
-<div class="container">
+<div class="container-s">
     <% if (user) { %>
-        <h2>Hello, <%= user.username %>!</h2>
-        <h3>You can share your thoughts with the community</h3>
-        <div>
+        <div class="text-form-box">
+            <h2>Hello, <%= user.username %>!</h2>
+            <h3 class="text-grey">You can share your thoughts with the community</h3>
+        </div>
+        <div class="addMessageTextBox">
             <h2>Add message</h2>
-            <a href="/message/add">+</a>
+            <a class="submit-btn padding10-20px" href="/message/add">+</a>
         </div>
     <% } else { %>
-        <h2>Welcome to Members Only!</h2>
-        <h3><a href="/sign-up">Sign up</a> so you can write your own post and became a member to reveal authors.</h3>
+        <div class="text-form-box">
+            <h2>Welcome to Members Only!</h2>
+            <h3 class="text-grey"><a href="/sign-up">Sign up</a> so you can write your own post and became a member to
+                reveal authors.
+            </h3>
+        </div>
     <% } %>
 
     <%- include('components/messages.ejs', {messages: messages}) %>

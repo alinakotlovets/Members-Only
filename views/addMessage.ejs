@@ -10,14 +10,19 @@
 <%- include("components/navbar.ejs") %>
 <div class="container">
     <% if (user) { %>
-        <form action="/message/add" method="post">
-            <label for="title">Title:</label>
-            <input type="text" id="title" value="<%= title %>" name="title">
-            <label for="message">Message:</label>
-            <input type="text" name="message" value="<%= message %>" id="message">
-            <%- include('components/errors.ejs', {errors: errors}) %>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="form-box">
+            <h2>Add message</h2>
+            <form class="form" action="/message/add" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" value="<%= title %>" name="title">
+                <label for="message">Message:</label>
+                <input type="text" name="message" value="<%= message %>" id="message">
+                <%- include('components/errors.ejs', {errors: errors}) %>
+                <div class="form-button-box">
+                    <button class="submit-btn" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     <% } %>
 </div>
 </body>

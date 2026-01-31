@@ -9,19 +9,27 @@
 <body>
 <%- include("components/navbar.ejs") %>
 <div class="container">
-    <h2>Admin status</h2>
-    <h3>Unlock exclusive features and see admin details</h3>
+    <div class="text-form-box margin-bottom-20px">
+        <h2>Admin status</h2>
+        <h3 class="text-grey">Unlock exclusive features and see admin details</h3>
+    </div>
     <% if(user && !user.is_admin) { %>
-        <form action="/admin" method="post">
-            <label for="adminCode">Admin code:</label>
-            <input type="text" id="adminCode" value="<%= adminCode %>" name="adminCode">
-            <%- include('components/errors.ejs', {errors: errors}) %>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="form-box">
+            <form class="form" action="/admin" method="post">
+                <label for="adminCode">Admin code:</label>
+                <input type="text" id="adminCode" value="<%= adminCode %>" name="adminCode">
+                <%- include('components/errors.ejs', {errors: errors}) %>
+                <div class="form-button-box">
+                    <button class="submit-btn" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
     <% } else if (user && user.is_member) { %>
-        <div>
-            <h2>You are admin congrats!</h2>
-            <a href="/">Go back to messages</a>
+        <div class="form-box">
+            <div class="form form-box">
+                <h2>You are admin congrats!</h2>
+                <a class="submit-btn" href="/">Go back to messages</a>
+            </div>
         </div>
     <% } %>
 </div>
